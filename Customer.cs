@@ -43,7 +43,7 @@ namespace Refactoring_RentalMovie
                     case Movie.NewRelease:
                         thisAmount += each.GetDaysRented() * 3;
                         break;
-                    case Movie.Childrens:
+                    case Movie.Children:
                         thisAmount += 1.5;
                         if (each.GetDaysRented() > 3)
                             thisAmount += (each.GetDaysRented() - 3) * 1.5;

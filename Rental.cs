@@ -1,8 +1,8 @@
 ﻿namespace Refactoring_RentalMovie
 {
     public class Rental {
-        private Movie _movie;
-        private int _daysRented;
+        private readonly Movie _movie;
+        private readonly int _daysRented;
         public Rental(Movie movie, int daysRented) {
             _movie = movie;
             _daysRented = daysRented;

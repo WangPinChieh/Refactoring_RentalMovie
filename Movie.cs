@@ -1,7 +1,7 @@
 ﻿namespace Refactoring_RentalMovie
 {
     public class Movie {
-        public const int Childrens = 2;
+        public const int Children = 2;
         public const int Regular = 0;
         public const int NewRelease = 1;
         private readonly string _title;
