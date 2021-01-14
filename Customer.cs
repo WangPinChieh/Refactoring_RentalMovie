@@ -33,7 +33,7 @@ namespace Refactoring_RentalMovie
                 double thisAmount = 0;
                 Rental each = rental;
                 //determine amounts for each line
-                thisAmount = amountFor(each);
+                thisAmount = each.amountFor();
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -53,29 +53,6 @@ namespace Refactoring_RentalMovie
             result += "You earned " + frequentRenterPoints
                                     +
                                     " frequent renter points";
-            return result;
-        }
-
-        private static double amountFor(Rental rental)
-        {
-            double result = 0;
-            switch (rental.GetMovie().GetPriceCode())
-            {
-                case Movie.Regular:
-                    result += 2;
-                    if (rental.GetDaysRented() > 2)
-                        result += (rental.GetDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NewRelease:
-                    result += rental.GetDaysRented() * 3;
-                    break;
-                case Movie.Children:
-                    result += 1.5;
-                    if (rental.GetDaysRented() > 3)
-                        result += (rental.GetDaysRented() - 3) * 1.5;
-                    break;
-            }
-
             return result;
         }
     }

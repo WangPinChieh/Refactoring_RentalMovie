@@ -13,5 +13,28 @@
         public Movie GetMovie() {
             return _movie;
         }
+
+        public double amountFor()
+        {
+            double result = 0;
+            switch (GetMovie().GetPriceCode())
+            {
+                case Movie.Regular:
+                    result += 2;
+                    if (GetDaysRented() > 2)
+                        result += (GetDaysRented() - 2) * 1.5;
+                    break;
+                case Movie.NewRelease:
+                    result += GetDaysRented() * 3;
+                    break;
+                case Movie.Children:
+                    result += 1.5;
+                    if (GetDaysRented() > 3)
+                        result += (GetDaysRented() - 3) * 1.5;
+                    break;
+            }
+
+            return result;
+        }
     }
 }
