@@ -15,9 +15,36 @@ namespace Refactoring_RentalMovie
         [Test]
         public void customer_rent_regular_movie_10_days()
         {
-            _customer.AddRental(new Rental(new Movie("RegularMovie 1", Movie.Regular), 10));
+            GivenRentals(new Rental(new Movie("RegularMovie 1", Movie.Regular), 10));
+            StatementShouldBe(
+                "Rental Record for Jay\n\tRegularMovie 1\t14\nAmount owed is 14\nYou earned 1 frequent renter points");
+        }
+
+        [Test]
+        public void customer_rent_children_movie_10_days()
+        {
+            GivenRentals(new Rental(new Movie("Children 1", Movie.Children), 10));
+            StatementShouldBe(
+                "Rental Record for Jay\n\tChildren 1\t12\nAmount owed is 12\nYou earned 1 frequent renter points");
+        }
+
+        [Test]
+        public void customer_rent_new_release_movie_10_days()
+        {
+            GivenRentals(new Rental(new Movie("NewRelease 1", Movie.NewRelease), 10));
+            StatementShouldBe(
+                "Rental Record for Jay\n\tNewRelease 1\t30\nAmount owed is 30\nYou earned 2 frequent renter points");
+        }
+
+        private void GivenRentals(Rental rental)
+        {
+            _customer.AddRental(rental);
+        }
+
+        private void StatementShouldBe(string expected)
+        {
             Assert.AreEqual(
-                "Rental Record for Jay\n\tRegularMovie 1\t14\nAmount owed is 14\nYou earned 1 frequent renter points",
+                expected,
                 _customer.Statement());
         }
     }
