@@ -32,7 +32,7 @@
         public double GetMovieCharge(int daysRented)
         {
             double result = 0;
-            switch (GetPriceCode())
+            switch (_priceCode)
             {
                 case Regular:
                     result += 2;
@@ -50,6 +50,15 @@
             }
 
             return result;
+        }
+
+        public int GetMovieFrequentRenterPoints(int daysRented)
+        {
+            int frequentRenterPoints = 1;
+            if ((_priceCode == NewRelease)
+                &&
+                daysRented > 1) frequentRenterPoints++;
+            return frequentRenterPoints;
         }
     }
 }
