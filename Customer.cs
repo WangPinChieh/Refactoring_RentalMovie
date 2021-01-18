@@ -45,14 +45,12 @@ namespace Refactoring_RentalMovie
 
         private int GetTotalFrequentRenterPoints()
         {
-            int frequentRenterPoints = _rentals.Sum(each => each.GetFrequentRenterPoints());
-            return frequentRenterPoints;
+            return _rentals.Sum(each => each.GetFrequentRenterPoints());
         }
 
         private double GetTotalAmount()
         {
-            double totalAmount = _rentals.Sum(each => each.GetCharge());
-            return totalAmount;
+            return _rentals.Sum(each => each.GetCharge());
         }
     }
 }
