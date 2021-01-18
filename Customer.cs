@@ -30,24 +30,17 @@ namespace Refactoring_RentalMovie
 
             foreach (var rental in _rentals)
             {
-                double thisAmount = 0;
                 Rental each = rental;
-                //determine amounts for each line
-                thisAmount = each.amountFor();
 
-                // add frequent renter points
                 frequentRenterPoints++;
-                // add bonus for a two day new release rental
                 if ((each.GetMovie().GetPriceCode() == Movie.NewRelease)
                     &&
                     each.GetDaysRented() > 1) frequentRenterPoints++;
-                //show figures for this rental
                 result += "\t" + each.GetMovie().GetTitle() + "\t" +
-                          thisAmount + "\n";
-                totalAmount += thisAmount;
+                          each.GetCharge() + "\n";
+                totalAmount += each.GetCharge();
             }
 
-            //add footer lines
             result += "Amount owed is " + totalAmount +
                       "\n";
             result += "You earned " + frequentRenterPoints
