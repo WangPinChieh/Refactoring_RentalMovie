@@ -33,9 +33,9 @@ namespace Refactoring_RentalMovie
                 Rental each = rental;
 
                 frequentRenterPoints += each.GetFrequentRenterPoints();
+                totalAmount += each.GetCharge();
                 result += "\t" + each.GetMovie().GetTitle() + "\t" +
                           each.GetCharge() + "\n";
-                totalAmount += each.GetCharge();
             }
 
             result += "Amount owed is " + totalAmount +
