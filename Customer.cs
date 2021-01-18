@@ -32,10 +32,7 @@ namespace Refactoring_RentalMovie
             {
                 Rental each = rental;
 
-                frequentRenterPoints++;
-                if ((each.GetMovie().GetPriceCode() == Movie.NewRelease)
-                    &&
-                    each.GetDaysRented() > 1) frequentRenterPoints++;
+                frequentRenterPoints += each.GetFrequentRenterPoints();
                 result += "\t" + each.GetMovie().GetTitle() + "\t" +
                           each.GetCharge() + "\n";
                 totalAmount += each.GetCharge();
