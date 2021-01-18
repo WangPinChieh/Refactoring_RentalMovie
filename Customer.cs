@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Refactoring_RentalMovie
 {
@@ -24,26 +25,34 @@ namespace Refactoring_RentalMovie
 
         public string Statement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
             string result = "Rental Record for " + GetName() + "\n";
 
             foreach (var rental in _rentals)
             {
                 Rental each = rental;
 
-                frequentRenterPoints += each.GetFrequentRenterPoints();
-                totalAmount += each.GetCharge();
                 result += "\t" + each.GetMovie().GetTitle() + "\t" +
                           each.GetCharge() + "\n";
             }
 
-            result += "Amount owed is " + totalAmount +
+            result += "Amount owed is " + GetTotalAmount() +
                       "\n";
-            result += "You earned " + frequentRenterPoints
+            result += "You earned " + GetTotalFrequentRenterPoints()
                                     +
                                     " frequent renter points";
             return result;
+        }
+
+        private int GetTotalFrequentRenterPoints()
+        {
+            int frequentRenterPoints = _rentals.Sum(each => each.GetFrequentRenterPoints());
+            return frequentRenterPoints;
+        }
+
+        private double GetTotalAmount()
+        {
+            double totalAmount = _rentals.Sum(each => each.GetCharge());
+            return totalAmount;
         }
     }
 }
