@@ -1,4 +1,6 @@
-﻿namespace Refactoring_RentalMovie
+﻿using System.Collections.Generic;
+
+namespace Refactoring_RentalMovie
 {
     public class Movie
     {
@@ -7,6 +9,13 @@
         public const int NewRelease = 1;
         private readonly string _title;
         private int _priceCode;
+
+        private readonly Dictionary<int, IPrice> _moviePrices = new Dictionary<int, IPrice>
+        {
+            {Regular, new RegularPrice()},
+            {NewRelease, new NewReleasePrice()},
+            {Children, new ChildrenPrice()},
+        };
 
         public Movie(string title, int priceCode)
         {
@@ -31,34 +40,12 @@
 
         public double GetMovieCharge(int daysRented)
         {
-            double result = 0;
-            switch (_priceCode)
-            {
-                case Regular:
-                    result += 2;
-                    if (daysRented > 2)
-                        result += (daysRented - 2) * 1.5;
-                    break;
-                case NewRelease:
-                    result += daysRented * 3;
-                    break;
-                case Children:
-                    result += 1.5;
-                    if (daysRented > 3)
-                        result += (daysRented - 3) * 1.5;
-                    break;
-            }
-
-            return result;
+            return _moviePrices[_priceCode].GetCharge(daysRented);
         }
 
         public int GetMovieFrequentRenterPoints(int daysRented)
         {
-            int frequentRenterPoints = 1;
-            if ((_priceCode == NewRelease)
-                &&
-                daysRented > 1) frequentRenterPoints++;
-            return frequentRenterPoints;
+            return _moviePrices[_priceCode].GetFrequentRenterPoints(daysRented);
         }
     }
 }

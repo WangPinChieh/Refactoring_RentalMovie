@@ -27,13 +27,9 @@ namespace Refactoring_RentalMovie
         {
             string result = "Rental Record for " + GetName() + "\n";
 
-            foreach (var rental in _rentals)
-            {
-                Rental each = rental;
-
-                result += "\t" + each.GetMovie().GetTitle() + "\t" +
-                          each.GetCharge() + "\n";
-            }
+            result = _rentals.Aggregate(result,
+                (current, rental) =>
+                    current + ("\t" + rental.GetMovie().GetTitle() + "\t" + rental.GetCharge() + "\n"));
 
             result += "Amount owed is " + GetTotalAmount() +
                       "\n";
